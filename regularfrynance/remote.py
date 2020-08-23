@@ -30,7 +30,7 @@ class Remote:
     def get(self, url):
         return utils.get(url, proxy=self._proxy)
 
-    def get_json(self, url):
+    def get_json_from_html(self, url):
         return utils.get_json(url, proxy=self._proxy)
 
     def request(self, **kwargs):

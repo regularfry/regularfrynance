@@ -285,7 +285,7 @@ class TickerBase:
             )
 
         # get info and sustainability
-        data = self._remote.get_json(self._urls.data_html())
+        data = self._remote.get_json_from_html(self._urls.data_html())
 
         # sustainability
         d = {}
@@ -353,7 +353,7 @@ class TickerBase:
             pass
 
         # get fundamentals
-        data = self._remote.get_json(self._urls.financials_html())
+        data = self._remote.get_json_from_html(self._urls.financials_html())
 
         # generic patterns
         for key in (
