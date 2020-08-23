@@ -21,20 +21,20 @@ class TickerUrls:
     def __init__(self, sym):
         self.sym = sym
 
-    def chart(self):
+    def chart_json(self):
         return "https://query1.finance.yahoo.com/v8/finance/chart/" + self.sym
 
-    def options(self, date=None):
+    def options_json(self, date=None):
         href = f"https://query1.finance.yahoo.com/v7/finance/options/{self.sym}"
         if date:
             href += "?date=" + date
         return href
 
-    def data(self):
+    def data_html(self):
         return "https://finance.yahoo.com/quote/" + self.sym
 
-    def holders(self):
-        return self.data() + "/holders"
+    def holders_html(self):
+        return self.data_html() + "/holders"
 
-    def financials(self):
-        return self.data() + "/financials"
+    def financials_html(self):
+        return self.data_html() + "/financials"

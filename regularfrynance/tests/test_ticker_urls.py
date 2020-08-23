@@ -24,13 +24,13 @@ class TestTickerUrls:
         urls = TickerUrls("0000")
 
         expected = "https://query1.finance.yahoo.com/v8/finance/chart/0000"
-        assert urls.chart() == expected
+        assert urls.chart_json() == expected
 
     def test_options(self):
         urls = TickerUrls("0000")
 
         expected = "https://query1.finance.yahoo.com/v7/finance/options/0000"
-        assert urls.options() == expected
+        assert urls.options_json() == expected
 
     def test_options_with_date(self):
         urls = TickerUrls("0000")
@@ -39,22 +39,22 @@ class TestTickerUrls:
         expected = (
             "https://query1.finance.yahoo.com/v7/finance/options/0000?date=mydate"
         )
-        assert urls.options(date=date) == expected
+        assert urls.options_json(date=date) == expected
 
     def test_data(self):
         urls = TickerUrls("0000")
 
         expected = "https://finance.yahoo.com/quote/0000"
-        assert urls.data() == expected
+        assert urls.data_html() == expected
 
     def test_holders(self):
         urls = TickerUrls("0000")
 
         expected = "https://finance.yahoo.com/quote/0000/holders"
-        assert urls.holders() == expected
+        assert urls.holders_html() == expected
 
     def test_financials(self):
         urls = TickerUrls("0000")
 
         expected = "https://finance.yahoo.com/quote/0000/financials"
-        assert urls.financials() == expected
+        assert urls.financials_html() == expected

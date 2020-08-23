@@ -145,7 +145,7 @@ class TickerBase:
             proxy = {"https": proxy}
 
         # Getting data from json
-        url = TickerUrls(self.ticker).chart()
+        url = TickerUrls(self.ticker).chart_json()
         data = _requests.get(url=url, params=params, proxies=proxy)
         if "Will be right back" in data.text:
             raise RuntimeError(
@@ -283,10 +283,10 @@ class TickerBase:
 
         # get info and sustainability
         urls = TickerUrls(self.ticker)
-        data = utils.get_json(urls.data(), proxy)
+        data = utils.get_json(urls.data_html(), proxy)
 
         # holders
-        text = utils.get(urls.holders(), proxy)
+        text = utils.get(urls.holders_html(), proxy)
         holders = _pd.read_html(text)
         self._major_holders = holders[0]
         if len(holders) > 1:
@@ -369,7 +369,7 @@ class TickerBase:
             pass
 
         # get fundamentals
-        data = utils.get_json(urls.financials(), proxy)
+        data = utils.get_json(urls.financials_html(), proxy)
 
         # generic patterns
         for key in (
