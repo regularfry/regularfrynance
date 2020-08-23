@@ -19,8 +19,6 @@
 # limitations under the License.
 #
 
-from __future__ import print_function
-
 import time as _time
 import multitasking as _multitasking
 import pandas as _pd

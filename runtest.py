@@ -13,9 +13,7 @@ Sanity check for most common library uses all working
 - Currency BTC-USD
 """
 
-from __future__ import print_function
 import regularfrynance as rf
-
 
 def test_regularfrynance():
     for symbol in ['MSFT', 'IWO', 'VFINX', '^GSPC', 'BTC-USD']:

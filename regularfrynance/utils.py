@@ -19,8 +19,6 @@
 # limitations under the License.
 #
 
-from __future__ import print_function
-
 import requests as _requests
 import re as _re
 import pandas as _pd

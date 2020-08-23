@@ -19,8 +19,6 @@
 # limitations under the License.
 #
 
-from __future__ import print_function
-
 import time as _time
 import datetime as _datetime
 import requests as _requests

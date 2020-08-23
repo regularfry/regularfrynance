@@ -19,8 +19,6 @@
 # limitations under the License.
 #
 
-from __future__ import print_function
-
 from . import Ticker, multi
 from collections import namedtuple as _namedtuple
 
