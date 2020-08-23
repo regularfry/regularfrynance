@@ -1,4 +1,3 @@
-
 # Yahoo! Finance market data downloader (+fix for Pandas Datareader)
 # https://github.com/regularfry/regularfrynance
 #
@@ -18,5 +17,14 @@
 #
 
 class TickerUrls:
-    def __init__(self):
-        pass
+    def __init__(self, sym):
+        self.sym = sym
+
+    def chart(self):
+        return "https://query1.finance.yahoo.com/v8/finance/chart/" + self.sym
+
+    def options(self, date=None):
+        href = f"https://query1.finance.yahoo.com/v7/finance/options/{self.sym}"
+        if date:
+            href += "?date=" + date
+        return href
