@@ -4,3 +4,4 @@ dist
 yfinance.egg-info
 *.pyc
 .pytest_cache/
+.*.sw*
