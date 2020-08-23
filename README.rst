@@ -1,62 +1,35 @@
 Yahoo! Finance market data downloader
 =====================================
 
-.. image:: https://img.shields.io/badge/python-2.7,%203.4+-blue.svg?style=flat
-    :target: https://pypi.python.org/pypi/yfinance
-    :alt: Python version
-
-.. image:: https://img.shields.io/pypi/v/yfinance.svg?maxAge=60
-    :target: https://pypi.python.org/pypi/yfinance
-    :alt: PyPi version
-
-.. image:: https://img.shields.io/pypi/status/yfinance.svg?maxAge=60
-    :target: https://pypi.python.org/pypi/yfinance
-    :alt: PyPi status
-
-.. image:: https://img.shields.io/pypi/dm/yfinance.svg?maxAge=2592000&label=installs&color=%2327B1FF
-    :target: https://pypi.python.org/pypi/yfinance
-    :alt: PyPi downloads
-
-.. image:: https://img.shields.io/travis/ranaroussi/yfinance/master.svg?maxAge=1
-    :target: https://travis-ci.com/ranaroussi/yfinance
-    :alt: Travis-CI build status
-
-.. image:: https://www.codefactor.io/repository/github/ranaroussi/yfinance/badge
-    :target: https://www.codefactor.io/repository/github/ranaroussi/yfinance
-    :alt: CodeFactor
-
-.. image:: https://img.shields.io/github/stars/ranaroussi/yfinance.svg?style=social&label=Star&maxAge=60
-    :target: https://github.com/ranaroussi/yfinance
+.. image:: https://img.shields.io/github/stars/regularfry/regularfrynance.svg?style=social&label=Star&maxAge=60
+    :target: https://github.com/regularfry/regularfrynance
     :alt: Star this repo
 
-.. image:: https://img.shields.io/twitter/follow/aroussi.svg?style=social&label=Follow&maxAge=60
-    :target: https://twitter.com/aroussi
+.. image:: https://img.shields.io/twitter/follow/regularfry.svg?style=social&label=Follow&maxAge=60
+    :target: https://twitter.com/regularfry
     :alt: Follow me on twitter
 
-\
 
 Ever since `Yahoo! finance <https://finance.yahoo.com>`_ decommissioned
 their historical data API, many programs that relied on it to stop working.
 
-**yfinance** aimes to solve this problem by offering a reliable, threaded,
+**regularfrynance** aims to solve this problem by offering a reliable, threaded,
 and Pythonic way to download historical market data from Yahoo! finance.
-
 
 NOTE
 ~~~~
 
-The library was originally named ``fix-yahoo-finance``, but
-I've since renamed it to ``yfinance`` as I no longer consider it a mere "fix".
-For reasons of backward-competability, ``fix-yahoo-finance`` now import and
-uses ``yfinance``, but you should install and use ``yfinance`` directly.
+This project was forked from the upstream **yfinance** for two reasons:
 
-`Changelog » <./CHANGELOG.rst>`__
+1. I was needing to put somewhere to put bug-fixes in the upstream, so
+   I wanted a fork for PRs.
+2. I wanted to address rate limiting (which the upstream doesn't
+   handle) and error handling in ways that need the published API to change.
+3. I've got a chance to break with python 2.7 that the upstream might
+   not.  Python 3 only from here on in.
 
------
-
-==> Check out this `Blog post <https://aroussi.com/#post/python-yahoo-finance>`_ for a detailed tutorial with code examples.
-
------
+This means that you should **continue to use yfinance** if you need
+API compatibility with existing code, or if you need to be on python 2.7.
 
 Quick Start
 ===========
@@ -230,27 +203,10 @@ you can "hijack" ``pandas_datareader.data.get_data_yahoo()`` method to use
     data = pdr.get_data_yahoo("SPY", start="2017-01-01", end="2017-04-30")
 
 
-Installation
-------------
-
-Install ``yfinance`` using ``pip``:
-
-.. code:: bash
-
-    $ pip install yfinance --upgrade --no-cache-dir
-
-
-Install ``yfinance`` using ``conda``:
-
-.. code:: bash
-
-    $ conda install -c ranaroussi yfinance
-
-
 Requirements
 ------------
 
-* `Python <https://www.python.org>`_ >= 2.7, 3.4+
+* `Python <https://www.python.org>`_ >= 3.4+
 * `Pandas <https://github.com/pydata/pandas>`_ (tested to work with >=0.23.1)
 * `Numpy <http://www.numpy.org>`_ >= 1.11.1
 * `requests <http://docs.python-requests.org/en/master/>`_ >= 2.14.2
@@ -264,7 +220,7 @@ Optional (if you want to use ``pandas_datareader``)
 Legal Stuff
 ------------
 
-**yfinance** is distributed under the **Apache Software License**. See the `LICENSE.txt <./LICENSE.txt>`_ file in the release for details.
+**regularfrynance** is distributed under the **Apache Software License**. See the `LICENSE.txt <./LICENSE.txt>`_ file in the release for details.
 
 
 P.S.
@@ -272,4 +228,4 @@ P.S.
 
 Please drop me an note with any feedback you have.
 
-**Ran Aroussi**
+Alex Young alex@blackkettle.org
