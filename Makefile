@@ -5,5 +5,6 @@ test:
 
 clean:
 	find . -name "__pycache__" | xargs rm -r
+	rm -rf .pytest_cache
 
 .PHONY: test clean
