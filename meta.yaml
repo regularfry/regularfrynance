@@ -1,5 +1,5 @@
-{% set name = "yfinance" %}
-{% set version = "0.1.48" %}
+{% set name = "regularfrynance" %}
+{% set version = "1.0.0" %}
 
 package:
   name: "{{ name|lower }}"
@@ -31,20 +31,20 @@ requirements:
 
 test:
   imports:
-    - yfinance
+    - regularfrynance
 
 about:
-  home: "https://github.com/ranaroussi/yfinance"
+  home: "https://github.com/regularfry/regularfrynance"
   license: "Apache Software"
   license_family: "APACHE"
   license_file: ""
   summary: "Yahoo! Finance market data downloader"
   description:
-  doc_url: "https://github.com/ranaroussi/yfinance"
-  dev_url: "https://pypi.python.org/pypi/yfinance"
-  doc_source_url: https://github.com/ranaroussi/yfinance/blob/master/README.rst
+  doc_url: "https://github.com/regularfry/regularfrynance"
+  dev_url: "https://pypi.python.org/pypi/regularfrynance"
+  doc_source_url: https://github.com/regularfry/regularfrynance/blob/master/README.rst
 
 
 extra:
   recipe-maintainers:
-    - ranaroussi
+    - regularfry

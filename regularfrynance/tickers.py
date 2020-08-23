@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 # Yahoo! Finance market data downloader (+fix for Pandas Datareader)
-# https://github.com/ranaroussi/yfinance
+# https://github.com/regularfry/regularfrynance
 #
+# Copyright 2020 Alex Young
 # Copyright 2017-2019 Ran Aroussi
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,7 +40,7 @@ def genTickers(tickers):
 class Tickers():
 
     def __repr__(self):
-        return 'yfinance.Tickers object <%s>' % ",".join(self.symbols)
+        return 'regularfrynance.Tickers object <%s>' % ",".join(self.symbols)
 
     def __init__(self, tickers):
         tickers = tickers if isinstance(

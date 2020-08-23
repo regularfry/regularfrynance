@@ -42,9 +42,9 @@ ticker data in amore Pythonic way:
 
 .. code:: python
 
-    import yfinance as yf
+    import regularfrynance as rf
 
-    msft = yf.Ticker("MSFT")
+    msft = rf.Ticker("MSFT")
 
     # get stock info
     msft.info
@@ -107,9 +107,9 @@ If you want to use a proxy server for downloading data, use:
 
 .. code:: python
 
-    import yfinance as yf
+    import regularfrynance as rf
 
-    msft = yf.Ticker("MSFT")
+    msft = rf.Ticker("MSFT")
 
     msft.history(..., proxy="PROXY_SERVER")
     msft.get_actions(proxy="PROXY_SERVER")
@@ -124,9 +124,9 @@ To initialize multiple ``Ticker`` objects, use
 
 .. code:: python
 
-    import yfinance as yf
+    import regularfrynance as rf
 
-    tickers = yf.Tickers('msft aapl goog')
+    tickers = rf.Tickers('msft aapl goog')
     # ^ returns a named tuple of Ticker objects
 
     # access each ticker using (example)
@@ -140,15 +140,15 @@ Fetching data for multiple tickers
 
 .. code:: python
 
-    import yfinance as yf
-    data = yf.download("SPY AAPL", start="2017-01-01", end="2017-04-30")
+    import regularfrynance as rf
+    data = rf.download("SPY AAPL", start="2017-01-01", end="2017-04-30")
 
 
 I've also added some options to make life easier :)
 
 .. code:: python
 
-    data = yf.download(  # or pdr.get_data_yahoo(...
+    data = rf.download(  # or pdr.get_data_yahoo(...
             # tickers list or string as well
             tickers = "SPY AAPL MSFT",
 
@@ -189,15 +189,15 @@ I've also added some options to make life easier :)
 
 If your code uses ``pandas_datareader`` and you want to download data faster,
 you can "hijack" ``pandas_datareader.data.get_data_yahoo()`` method to use
-**yfinance** while making sure the returned data is in the same format as
+**regularfrynance** while making sure the returned data is in the same format as
 **pandas_datareader**'s ``get_data_yahoo()``.
 
 .. code:: python
 
     from pandas_datareader import data as pdr
 
-    import yfinance as yf
-    yf.pdr_override() # <== that's all it takes :-)
+    import regularfrynance as rf
+    rf.pdr_override() # <== that's all it takes :-)
 
     # download dataframe
     data = pdr.get_data_yahoo("SPY", start="2017-01-01", end="2017-04-30")
