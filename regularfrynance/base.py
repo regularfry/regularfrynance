@@ -33,10 +33,6 @@ except ImportError:
 from . import utils
 from .ticker_urls import TickerUrls
 
-# import json as _json
-# import re as _re
-# import sys as _sys
-
 from . import shared
 
 

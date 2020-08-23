@@ -143,7 +143,6 @@ def download(
             "\n%.f Failed download%s:"
             % (len(shared._ERRORS), "s" if len(shared._ERRORS) > 1 else "")
         )
-        # print(shared._ERRORS)
         print("\n".join(["- %s: %s" % v for v in list(shared._ERRORS.items())]))
 
     if len(tickers) == 1:

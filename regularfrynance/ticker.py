@@ -19,15 +19,10 @@
 # limitations under the License.
 #
 
-# import time as _time
 import datetime as _datetime
 import requests as _requests
 import pandas as _pd
 
-# import numpy as _np
-
-# import json as _json
-# import re as _re
 from collections import namedtuple as _namedtuple
 
 from .base import TickerBase
