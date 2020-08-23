@@ -1,0 +1,9 @@
+test:
+	@# We need this because for some reason I haven't yet figured out,
+	@# running pytest alone doesn't get picked up by pyenv.
+	python -m pytest
+
+clean:
+	find . -name "__pycache__" | xargs rm -r
+
+.PHONY: test clean
