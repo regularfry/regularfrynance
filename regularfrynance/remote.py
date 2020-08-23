@@ -35,3 +35,7 @@ class Remote:
 
     def request(self, **kwargs):
         return _requests.get(proxies=self._proxy, **kwargs)
+
+    def is_available(self, url):
+        response = _requests.head(url=url, proxies=self._proxy)
+        return response.ok

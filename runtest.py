@@ -17,6 +17,8 @@ import regularfrynance as rf
 
 
 def test_regularfrynance():
+    assert rf.Ticker("NOSUCHTICKER").is_available() is False
+
     symbols = [
         "MSFT", 
         "VOD.L",
@@ -29,6 +31,7 @@ def test_regularfrynance():
     for symbol in symbols:
         print(">>", symbol, end=" ... ")
         ticker = rf.Ticker(symbol)
+        assert ticker.is_available()
 
         # always should have info and history for valid symbols
         assert ticker.info is not None and ticker.info != {}

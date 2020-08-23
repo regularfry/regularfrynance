@@ -61,6 +61,9 @@ class TickerBase:
         self._balancesheet = {"yearly": utils.empty_df(), "quarterly": utils.empty_df()}
         self._cashflow = {"yearly": utils.empty_df(), "quarterly": utils.empty_df()}
 
+    def is_available(self):
+        return self._remote.is_available(self._urls.chart_json())
+
     def history(
         self,
         period="1mo",
@@ -245,6 +248,25 @@ class TickerBase:
 
     # ------------------------
 
+    def _get_holders(self):
+        # holders
+        text = self._remote.get(self._urls.holders_html())
+        holders = _pd.read_html(text)
+        self._major_holders = holders[0]
+        if len(holders) > 1:
+            self._institutional_holders = holders[1]
+        else:
+            self._institutional_holders = _pd.DataFrame()
+        if "Date Reported" in self._institutional_holders:
+            self._institutional_holders["Date Reported"] = _pd.to_datetime(
+                self._institutional_holders["Date Reported"]
+            )
+        if "% Out" in self._institutional_holders:
+            self._institutional_holders["% Out"] = (
+                self._institutional_holders["% Out"].str.replace("%", "").astype(float)
+                / 100
+            )
+
     def _get_fundamentals(self, kind=None):
         def cleanup(data):
             df = _pd.DataFrame(data).drop(columns=["maxAge"])
@@ -265,24 +287,6 @@ class TickerBase:
 
         if self._fundamentals:
             return
-
-        # holders
-        text = self._remote.get(self._urls.holders_html())
-        holders = _pd.read_html(text)
-        self._major_holders = holders[0]
-        if len(holders) > 1:
-            self._institutional_holders = holders[1]
-        else:
-            self._institutional_holders = _pd.DataFrame()
-        if "Date Reported" in self._institutional_holders:
-            self._institutional_holders["Date Reported"] = _pd.to_datetime(
-                self._institutional_holders["Date Reported"]
-            )
-        if "% Out" in self._institutional_holders:
-            self._institutional_holders["% Out"] = (
-                self._institutional_holders["% Out"].str.replace("%", "").astype(float)
-                / 100
-            )
 
         # get info and sustainability
         data = self._remote.get_json_from_html(self._urls.data_html())
@@ -328,6 +332,9 @@ class TickerBase:
             self._info["logo_url"] = "https://logo.clearbit.com/%s" % domain
         except Exception:
             pass
+
+        # holders
+        self._get_holders()
 
         # events
         try:
