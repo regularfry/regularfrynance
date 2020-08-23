@@ -46,6 +46,10 @@ ticker data in amore Pythonic way:
 
     msft = rf.Ticker("MSFT")
 
+    # check the ticker is available at Yahoo
+    if not msft.is_available():
+	raise Exception("MSFT is not available
+
     # get stock info
     msft.info
 
@@ -66,10 +70,10 @@ ticker data in amore Pythonic way:
     msft.quarterly_financials
 
     # show major holders
-    stock.major_holders
+    msft.major_holders
 
     # show institutional holders
-    stock.institutional_holders
+    msft.institutional_holders
 
     # show balance heet
     msft.balance_sheet
@@ -92,10 +96,6 @@ ticker data in amore Pythonic way:
     # show next event (earnings, etc)
     msft.calendar
 
-    # show ISIN code - *experimental*
-    # ISIN = International Securities Identification Number
-    msft.isin
-
     # show options expirations
     msft.options
 
@@ -109,15 +109,7 @@ If you want to use a proxy server for downloading data, use:
 
     import regularfrynance as rf
 
-    msft = rf.Ticker("MSFT")
-
-    msft.history(..., proxy="PROXY_SERVER")
-    msft.get_actions(proxy="PROXY_SERVER")
-    msft.get_dividends(proxy="PROXY_SERVER")
-    msft.get_splits(proxy="PROXY_SERVER")
-    msft.get_balance_sheet(proxy="PROXY_SERVER")
-    msft.get_cashflow(proxy="PROXY_SERVER")
-    msgt.option_chain(..., proxy="PROXY_SERVER")
+    msft = rf.Ticker("MSFT", proxy="PROXY_SERVER")
     ...
 
 To initialize multiple ``Ticker`` objects, use

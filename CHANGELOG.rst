@@ -1,6 +1,15 @@
 Change Log
 ===========
 
+2.0.0
+-----
+- Rename to `regularfrynance` after the fork.
+- Dropped Python 2.7 support.
+- Removed the `proxy` parameter from `Ticker` instance methods.  You pass it in to the constructor instead now.
+- Add the `Ticker.is_available()` instance method.  This lets you check up-front whether the requests are likely to fail.
+- Removed `get_isin`.  It doesn't currently work for many tickers, and it's calling a non-Yahoo endpoint.
+- Added some pytest infrastructure and tests.
+
 0.1.54
 ------
 - ISIN lookup working with intl. tickers
