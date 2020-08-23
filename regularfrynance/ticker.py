@@ -39,7 +39,7 @@ class Ticker(TickerBase):
         return "regularfrynance.Ticker object <%s>" % self.ticker
 
     def _download_options(self, date=None, proxy=None):
-        url = TickerUrls(self.ticker).options(date)
+        url = self._urls.options(date)
 
         # setup proxy in requests format
         if proxy is not None:

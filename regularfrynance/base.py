@@ -43,6 +43,7 @@ from . import shared
 class TickerBase:
     def __init__(self, ticker):
         self.ticker = ticker.upper()
+        self._urls = TickerUrls(self.ticker)
         self._history = None
 
         self._fundamentals = False
@@ -145,7 +146,7 @@ class TickerBase:
             proxy = {"https": proxy}
 
         # Getting data from json
-        url = TickerUrls(self.ticker).chart_json()
+        url = self._urls.chart_json()
         data = _requests.get(url=url, params=params, proxies=proxy)
         if "Will be right back" in data.text:
             raise RuntimeError(
@@ -281,12 +282,8 @@ class TickerBase:
         if self._fundamentals:
             return
 
-        # get info and sustainability
-        urls = TickerUrls(self.ticker)
-        data = utils.get_json(urls.data_html(), proxy)
-
         # holders
-        text = utils.get(urls.holders_html(), proxy)
+        text = utils.get(self._urls.holders_html(), proxy)
         holders = _pd.read_html(text)
         self._major_holders = holders[0]
         if len(holders) > 1:
@@ -302,6 +299,9 @@ class TickerBase:
                 self._institutional_holders["% Out"].str.replace("%", "").astype(float)
                 / 100
             )
+
+        # get info and sustainability
+        data = utils.get_json(self._urls.data_html(), proxy)
 
         # sustainability
         d = {}
@@ -369,7 +369,7 @@ class TickerBase:
             pass
 
         # get fundamentals
-        data = utils.get_json(urls.financials_html(), proxy)
+        data = utils.get_json(self._urls.financials_html(), proxy)
 
         # generic patterns
         for key in (
