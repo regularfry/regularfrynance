@@ -44,7 +44,6 @@ class TickerBase:
     def __init__(self, ticker):
         self.ticker = ticker.upper()
         self._history = None
-        self._scrape_url = "https://finance.yahoo.com/quote"
 
         self._fundamentals = False
         self._info = None
@@ -283,11 +282,11 @@ class TickerBase:
             return
 
         # get info and sustainability
-        url = "%s/%s" % (self._scrape_url, self.ticker)
-        data = utils.get_json(url, proxy)
+        urls = TickerUrls(self.ticker)
+        data = utils.get_json(urls.data(), proxy)
 
         # holders
-        text = utils.get(url + "/holders", proxy)
+        text = utils.get(urls.holders(), proxy)
         holders = _pd.read_html(text)
         self._major_holders = holders[0]
         if len(holders) > 1:
@@ -370,7 +369,7 @@ class TickerBase:
             pass
 
         # get fundamentals
-        data = utils.get_json(url + "/financials", proxy)
+        data = utils.get_json(urls.financials(), proxy)
 
         # generic patterns
         for key in (

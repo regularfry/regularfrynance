@@ -10,4 +10,7 @@ clean:
 fixup:
 	black regularfrynance
 
+test_int:
+	python runtest.py
+
 .PHONY: test clean

@@ -17,7 +17,16 @@ import regularfrynance as rf
 
 
 def test_regularfrynance():
-    for symbol in ["MSFT", "IWO", "VFINX", "^GSPC", "BTC-USD"]:
+    symbols = [
+        "MSFT", 
+        "VOD.L",
+        "IWO", 
+        "VFINX", 
+        "^GSPC", 
+        "BTC-USD"
+    ]
+    
+    for symbol in symbols:
         print(">>", symbol, end=" ... ")
         ticker = rf.Ticker(symbol)
 
