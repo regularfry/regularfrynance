@@ -33,16 +33,10 @@ class Ticker(TickerBase):
     def __repr__(self):
         return "regularfrynance.Ticker object <%s>" % self.ticker
 
-    def _download_options(self, date=None, proxy=None):
+    def _download_options(self, date=None):
         url = self._urls.options(date)
 
-        # setup proxy in requests format
-        if proxy is not None:
-            if isinstance(proxy, dict) and "https" in proxy:
-                proxy = proxy["https"]
-            proxy = {"https": proxy}
-
-        r = _requests.get(url=url, proxies=proxy).json()
+        r = self._remote.request(url=url).json()
         if r["optionChain"]["result"]:
             for exp in r["optionChain"]["result"][0]["expirationDates"]:
                 self._expirations[
@@ -76,9 +70,9 @@ class Ticker(TickerBase):
             data["lastTradeDate"] = data["lastTradeDate"].tz_localize(tz)
         return data
 
-    def option_chain(self, date=None, proxy=None, tz=None):
+    def option_chain(self, date=None, tz=None):
         if date is None:
-            options = self._download_options(proxy=proxy)
+            options = self._download_options()
         else:
             if not self._expirations:
                 self._download_options()
@@ -89,7 +83,7 @@ class Ticker(TickerBase):
                     % (date, ", ".join(self._expirations))
                 )
             date = self._expirations[date]
-            options = self._download_options(date, proxy=proxy)
+            options = self._download_options(date)
 
         return _namedtuple("Options", ["calls", "puts"])(
             **{
@@ -99,10 +93,6 @@ class Ticker(TickerBase):
         )
 
     # ------------------------
-
-    @property
-    def isin(self):
-        return self.get_isin()
 
     @property
     def major_holders(self):

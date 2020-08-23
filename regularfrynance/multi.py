@@ -234,7 +234,7 @@ def _download_one(
     rounding=False,
 ):
 
-    return Ticker(ticker).history(
+    return Ticker(ticker, proxy=proxy).history(
         period=period,
         interval=interval,
         start=start,
@@ -243,7 +243,6 @@ def _download_one(
         actions=actions,
         auto_adjust=auto_adjust,
         back_adjust=back_adjust,
-        proxy=proxy,
         rounding=rounding,
         many=True,
     )
