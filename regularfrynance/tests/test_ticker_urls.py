@@ -18,6 +18,7 @@
 
 from regularfrynance.ticker_urls import TickerUrls
 
+
 class TestTickerUrls:
     def test_chart_url(self):
         urls = TickerUrls("0000")
@@ -35,6 +36,25 @@ class TestTickerUrls:
         urls = TickerUrls("0000")
         date = "mydate"
 
-        expected = "https://query1.finance.yahoo.com/v7/finance/options/0000?date=mydate"
+        expected = (
+            "https://query1.finance.yahoo.com/v7/finance/options/0000?date=mydate"
+        )
         assert urls.options(date=date) == expected
 
+    def test_data(self):
+        urls = TickerUrls("0000")
+
+        expected = "https://finance.yahoo.com/quote/0000"
+        assert urls.data() == expected
+
+    def test_holders(self):
+        urls = TickerUrls("0000")
+
+        expected = "https://finance.yahoo.com/quote/0000/holders"
+        assert urls.holders() == expected
+
+    def test_financials(self):
+        urls = TickerUrls("0000")
+
+        expected = "https://finance.yahoo.com/quote/0000/financials"
+        assert urls.financials() == expected

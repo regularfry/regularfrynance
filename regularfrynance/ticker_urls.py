@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 
+
 class TickerUrls:
     def __init__(self, sym):
         self.sym = sym
@@ -28,3 +29,12 @@ class TickerUrls:
         if date:
             href += "?date=" + date
         return href
+
+    def data(self):
+        return "https://finance.yahoo.com/quote/" + self.sym
+
+    def holders(self):
+        return self.data() + "/holders"
+
+    def financials(self):
+        return self.data() + "/financials"
