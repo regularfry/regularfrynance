@@ -31,6 +31,7 @@ except ImportError:
     from urllib import quote as urlencode
 
 from . import utils
+from .ticker_urls import TickerUrls
 
 # import json as _json
 # import re as _re
@@ -43,7 +44,6 @@ class TickerBase:
     def __init__(self, ticker):
         self.ticker = ticker.upper()
         self._history = None
-        self._base_url = "https://query1.finance.yahoo.com"
         self._scrape_url = "https://finance.yahoo.com/quote"
 
         self._fundamentals = False
@@ -146,7 +146,7 @@ class TickerBase:
             proxy = {"https": proxy}
 
         # Getting data from json
-        url = "{}/v8/finance/chart/{}".format(self._base_url, self.ticker)
+        url = TickerUrls(self.ticker).chart()
         data = _requests.get(url=url, params=params, proxies=proxy)
         if "Will be right back" in data.text:
             raise RuntimeError(
