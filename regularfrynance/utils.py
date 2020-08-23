@@ -75,7 +75,7 @@ def get_json(url, proxy=None):
 
 
 def camel2title(o):
-    return [_re.sub("([a-z])([A-Z])", '\\1 \\2', i).title() for i in o]
+    return [_re.sub("([a-z])([A-Z])", "\\1 \\2", i).title() for i in o]
 
 
 def auto_adjust(data):

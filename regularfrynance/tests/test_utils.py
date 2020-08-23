@@ -18,10 +18,11 @@
 
 import regularfrynance.utils as utils
 
+
 class TestCamel2Title:
     def test_changes_headlines(self):
         camel = ["oneCamel", "twoCamel"]
 
         title = utils.camel2title(camel)
-        
+
         assert title == ["One Camel", "Two Camel"]

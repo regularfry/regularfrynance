@@ -7,4 +7,7 @@ clean:
 	find . -name "__pycache__" | xargs rm -r
 	rm -rf .pytest_cache
 
+fixup:
+	black regularfrynance
+
 .PHONY: test clean
