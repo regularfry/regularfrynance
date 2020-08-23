@@ -15,14 +15,15 @@ Sanity check for most common library uses all working
 
 import regularfrynance as rf
 
+
 def test_regularfrynance():
-    for symbol in ['MSFT', 'IWO', 'VFINX', '^GSPC', 'BTC-USD']:
-        print(">>", symbol, end=' ... ')
+    for symbol in ["MSFT", "IWO", "VFINX", "^GSPC", "BTC-USD"]:
+        print(">>", symbol, end=" ... ")
         ticker = rf.Ticker(symbol)
 
         # always should have info and history for valid symbols
-        assert(ticker.info is not None and ticker.info != {})
-        assert(ticker.history(period="max").empty is False)
+        assert ticker.info is not None and ticker.info != {}
+        assert ticker.history(period="max").empty is False
 
         # following should always gracefully handled, no crashes
         ticker.cashflow
