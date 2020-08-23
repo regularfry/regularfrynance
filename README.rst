@@ -38,7 +38,7 @@ The Ticker module
 ~~~~~~~~~~~~~~~~~
 
 The ``Ticker`` module, which allows you to access
-ticker data in amore Pythonic way:
+ticker data in a Pythonic way:
 
 .. code:: python
 
@@ -48,7 +48,7 @@ ticker data in amore Pythonic way:
 
     # check the ticker is available at Yahoo
     if not msft.is_available():
-	raise Exception("MSFT is not available
+	raise Exception("MSFT is not available")
 
     # get stock info
     msft.info
@@ -170,7 +170,7 @@ I've also added some options to make life easier :)
             # (optional, default is True)
             threads = True,
 
-            # proxy URL scheme use use when downloading?
+            # proxy URL scheme use use when downloading
             # (optional, default is None)
             proxy = None
         )
