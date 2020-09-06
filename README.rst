@@ -87,6 +87,10 @@ ticker data in a Pythonic way:
     msft.earnings
     msft.quarterly_earnings
 
+    # show the currency used for balance_sheet, cashflow, earnings
+    # Note that this is not always the same as .info['currency'].
+    msft.financials_currency
+
     # show sustainability
     msft.sustainability
 

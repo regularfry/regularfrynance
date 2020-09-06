@@ -179,3 +179,7 @@ class Ticker(TickerBase):
         if not self._expirations:
             self._download_options()
         return tuple(self._expirations.keys())
+
+    @property
+    def financials_currency(self):
+        return self.get_financials_currency()

@@ -31,6 +31,7 @@ try:
 except ImportError:
     import json as _json
 
+from .app_page import AppPage
 
 def empty_df(index=[]):
     empty = _pd.DataFrame(
@@ -54,6 +55,13 @@ def get(url, proxy=None, **kwargs):
     return response.text
 
 
+def nullify_empty_dicts(data):
+    return _json.loads(_json.dumps(data).replace("{}", "null"))
+
+def select_raw_values(data):
+    json_str = _json.dumps(data)
+    return _json.loads(_re.sub(r"\{[\'|\"]raw[\'|\"]:(.*?),(.*?)\}", r"\1", json_str))
+
 def get_json(url, proxy=None):
     html = get(url, proxy)
 
@@ -62,16 +70,8 @@ def get_json(url, proxy=None):
         if "QuoteSummaryStore" not in html:
             return {}
 
-    json_str = (
-        html.split("root.App.main =")[1].split("(this)")[0].split(";\n}")[0].strip()
-    )
-    data = _json.loads(json_str)["context"]["dispatcher"]["stores"]["QuoteSummaryStore"]
-
-    # return data
-    new_data = _json.dumps(data).replace("{}", "null")
-    new_data = _re.sub(r"\{[\'|\"]raw[\'|\"]:(.*?),(.*?)\}", r"\1", new_data)
-
-    return _json.loads(new_data)
+    data = AppPage(html).quote_summary_store()
+    return select_raw_values(nullify_empty_dicts(data))
 
 
 def camel2title(o):

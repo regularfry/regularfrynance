@@ -61,6 +61,8 @@ class TickerBase:
         self._balancesheet = {"yearly": utils.empty_df(), "quarterly": utils.empty_df()}
         self._cashflow = {"yearly": utils.empty_df(), "quarterly": utils.empty_df()}
 
+        self._financials_currency = None
+
     def is_available(self):
         return self._remote.is_available(self._urls.chart_json())
 
@@ -361,6 +363,7 @@ class TickerBase:
 
         # get fundamentals
         data = self._remote.get_json_from_html(self._urls.financials_html())
+        self._financials_data = data
 
         # generic patterns
         for key in (
@@ -376,6 +379,9 @@ class TickerBase:
             item = key[1] + "HistoryQuarterly"
             if isinstance(data.get(item), dict):
                 key[0]["quarterly"] = cleanup(data[item][key[2]])
+
+        if isinstance(data.get("earnings"), dict):
+            self._financials_currency = data['earnings']['financialCurrency']
 
         # earnings
         if isinstance(data.get("earnings"), dict):
@@ -482,3 +488,23 @@ class TickerBase:
             self.history(period="max")
         actions = self._history[["Dividends", "Stock Splits"]]
         return actions[actions != 0].dropna(how="all").fillna(0)
+
+    # Companies like ZAM.L have more complicated reports than you
+    # might expect.  In this case, they are listed on the London Stock
+    # Exchange, their share price is listed (and traded) in GBp, but
+    # their annual report has financial statements in Zambian Kwacha
+    # (ZMW) and USD.  This even seems to have tripped up Yahoo
+    # themselves, whose front end says "Currency in ZMW" above the
+    # balance sheet, but the numerical values actually correspond to
+    # the USD column in the statement.
+    #
+    # I have no idea why they do this.  The data in the API we're
+    # using is correctly in ZMW, so they must be doing an additional
+    # conversion in their front end.
+    #
+    # Adding a financials_currency property allows correct reporting
+    # of the financials data where the currency differs from the
+    # currency of the ticker itself.
+    def get_financials_currency(self):
+        self._get_fundamentals()
+        return self._financials_currency
