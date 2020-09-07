@@ -1,6 +1,11 @@
 Change Log
 ===========
 
+2.1.0
+-----
+- Added `Ticker.financials_currency` to cater for the cases where the ticker currency isn't the same as the currency the financial reports are in.
+- Add the `AppPage` abstraction to manage the downloaded HTML.
+
 2.0.0
 -----
 - Rename to `regularfrynance` after the fork.
